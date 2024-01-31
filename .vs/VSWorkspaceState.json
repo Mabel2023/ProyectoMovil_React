@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\.idea",
+    "\\frontend",
+    "\\frontend\\app-ejemplo",
+    "\\frontend\\app-ejemplo\\src",
+    "\\frontend\\app-ejemplo\\src\\componentes",
+    "\\frontend\\app-ejemplo\\src\\componentes\\home",
+    "\\frontend\\app-ejemplo\\src\\componentes\\list",
+    "\\frontend\\app-ejemplo\\src\\screen"
+  ],
+  "SelectedNode": "\\frontend\\app-ejemplo\\src\\componentes\\home\\ProfileCard.js",
+  "PreviewInSolutionExplorer": false
+}
