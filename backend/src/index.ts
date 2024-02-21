@@ -1,14 +1,14 @@
 import cors from "cors"
 import multer from "multer";
-import * as dotenv from 'dotenv';
+//import * as dotenv from 'dotenv';
 import {v4 as uuidv4} from 'uuid';
 import express, {response} from "express"
 import {process_doc} from "./lang_script";
 
-dotenv.config()
+//dotenv.config()
 const app = express()
 app.use(express.json())
-const PORT = 9004
+const PORT = 9021
 app.use(cors())
 const storage = multer.diskStorage({
     destination: (req, file, callback) => {
@@ -29,24 +29,27 @@ const upload = multer({
     }
 })
 
-import {OpenAIApi, Configuration} from 'openai'
-import * as path from "path";
+/*import {OpenAIApi, Configuration} from 'openai'*/
+import { OpenAI } from '@langchain/openai';
 
-const configuration = new Configuration({
-    apiKey: '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'
-})
-const openai = new OpenAIApi(configuration)
+
+const openai = new OpenAI({
+    openAIApiKey: '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'
+});
+//const openai = new OpenAIApi(configuration)
+import * as path from "path";
 
 const generatePrompt = (numberToConvert: number) => {
     return ` Tu tienes un rol de convertidor binario y requiero que conviertes este numero ${numberToConvert} a  binario`
+    //return ` Cuentame cuantas vocales tiene la siguiente frase ${numberToConvert}, sin contar los espacios`
 
 }
 
 let names = [
     {
         id: uuidv4(),
-        firstName: 'Pablo',
-        lastName: 'Caiza'
+        firstName: 'Belen',
+        lastName: 'Martinez'
     },
     {
         id: uuidv4(),
@@ -57,7 +60,7 @@ let names = [
 app.get("/ping", (req, res) => {
     console.log("alguien ha dado pin!!")
     res.setHeader("Content-Type", "application/json")
-    res.send("pong")
+    res.send("conexion exitosa")
 })
 
 
@@ -91,14 +94,14 @@ app.post('/nombres', (req, res) => {
 
 app.post('/openapi', async (req, res) => {
     const {prompt} = req.body
-    const completion = await openai.createCompletion({
-        model: 'text-davinci-003',
-        prompt: generatePrompt(prompt),
-        temperature: 0.1
-    })
+    const completion = await openai.invoke(
+         generatePrompt(prompt),
+    )
+
+    res.send({result: completion})
 
     // @ts-ignore
-    res.send({result: completion.data.choices[0].text.trim(), token: completion.data.usage.total_tokens})
+    //res.send({result: completion.data.choices[0].text.trim(), token: completion.data.usage.total_tokens})
 })
 
 app.delete('/nombres/:id', (req, res) => {

@@ -1,31 +1,37 @@
 import React, {useState} from "react";
 import {TextInput, View, StyleSheet, Text, Button} from "react-native";
-import axios from 'axios';
+//import axios from 'axios';
 
 const Chat = () => {
     const [prompt, setPrompt] = useState('')
     const [result, setResult] = useState('')
 
+
     const getResultFromOpenApi = async () => {
         try {
-            const response = await axios.post('http://localhost:9004/openapi', {
-                prompt
-            }, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-           /* const response = await fetch('http://localhost:9004/openapi', {
+            //const response = await axios.post('http://localhost:9004/openapi', {
+            //    prompt
+            //}, {
+            //    headers: {
+            //        'Content-Type': 'application/json'
+            //    }
+            //});
+            const response = await fetch('http://localhost:9021/openapi', {
                 method: 'POST',
                 headers: {
                     "Content-Type": 'application/json'
-                },
+                },  
                 body: JSON.stringify({prompt})
-            })*/
-            const jsonData = await response.json()
-            setResult(`${jsonData.result} y los token utilizados fueron ${jsonData.token} `)
+            })
+            const jsonData = await response.json();
+            console.log(jsonData);
+
+            const tokensUsed = jsonData.tokens;
+
+            setResult(`${jsonData.result} y los token utilizados fueron ${tokensUsed} `)
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            setResult("Ocurrió un error al obtener la respuesta de la API.");
         }
     }
 
@@ -58,7 +64,7 @@ const styles = StyleSheet.create({
         margin: 10
     },
     text: {
-        fontSize: 20,
+        fontSize: 10,
         fontWeight: 'bold',
         textAlign: "center"
     }
