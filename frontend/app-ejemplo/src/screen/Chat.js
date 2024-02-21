@@ -6,7 +6,6 @@ const Chat = () => {
     const [prompt, setPrompt] = useState('')
     const [result, setResult] = useState('')
 
-
     const getResultFromOpenApi = async () => {
         try {
             //const response = await axios.post('http://localhost:9004/openapi', {
@@ -31,7 +30,7 @@ const Chat = () => {
             setResult(`${jsonData.result} y los token utilizados fueron ${tokensUsed} `)
         } catch (error) {
             console.log(error);
-            setResult("Ocurrió un error al obtener la respuesta de la API.");
+            //setResult("Ocurrió un error al obtener la respuesta de la API.");
         }
     }
 
@@ -64,7 +63,7 @@ const styles = StyleSheet.create({
         margin: 10
     },
     text: {
-        fontSize: 10,
+        fontSize: 20,
         fontWeight: 'bold',
         textAlign: "center"
     }

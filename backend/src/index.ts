@@ -34,14 +34,14 @@ import { OpenAI } from '@langchain/openai';
 
 
 const openai = new OpenAI({
-    openAIApiKey: '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'
+    openAIApiKey: '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'
 });
 //const openai = new OpenAIApi(configuration)
 import * as path from "path";
 
 const generatePrompt = (numberToConvert: number) => {
     return ` Tu tienes un rol de convertidor binario y requiero que conviertes este numero ${numberToConvert} a  binario`
-    //return ` Cuentame cuantas vocales tiene la siguiente frase ${numberToConvert}, sin contar los espacios`
+    
 
 }
 
